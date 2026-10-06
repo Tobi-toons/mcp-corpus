@@ -1,17 +1,265 @@
 ---
-   import '../styles/global.css';
+import Layout from '../layouts/Layout.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import CommandBar from '../components/CommandBar.astro';
+import Bouncers from '../components/Bouncers.astro';
+import { getCommands } from '../lib/commands';
+import { AGENTS } from '../lib/agents';
+
+const commands = getCommands();
+const REPO = 'https://github.com/Tobi-toons/mcp-corpus';
+const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>MCP Corpus</title>
-	</head>
-	<body>
-		<h1 class="text-4xl font-bold text-teal-500">MCP Corpus</h1>
-	</body>
-</html>
+<Layout>
+  <noscript><style>.bar { opacity: 1 !important; transform: none !important; }</style></noscript>
+
+  <Bouncers />
+
+  <!-- Dynamic island: hover it to open -->
+  <div class="island" id="island" data-open="false">
+    <div class="island-panel">
+      <div>
+        <div class="logo-row" id="agent-buttons">
+          {AGENTS.map((a, n) => (
+            <button type="button" class="agent-btn" data-agent-id={a.id} aria-pressed="false" style={`--brand:${a.color}; --n:${n}`}>
+              <img src={a.logo} alt="" />
+              <span>{a.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+    <label class="island-row" for="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="search" class="island-input" type="search" placeholder="Search commands" autocomplete="off" spellcheck="false" />
+      <span class="island-kbd mono">/</span>
+    </label>
+  </div>
+
+  <div class="fixed right-4 top-3 z-[60]"><ThemeToggle /></div>
+
+  <main class="page mx-auto max-w-5xl px-5 pb-24 pt-28">
+    <header class="mb-10 flex flex-col items-center gap-4 text-center">
+      <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
+        MCP <span style="color: var(--accent);">Corpus</span>
+      </h1>
+      <p class="max-w-xl text-lg" style="color: var(--muted);">
+        The best commands for your AI agents, in one place. Open source, and checked by a person before they go live.
+      </p>
+      <div class="mt-2 flex gap-3">
+        <a href={SUBMIT} target="_blank" rel="noopener noreferrer"
+           class="rounded-full px-5 py-2.5 text-sm font-semibold transition hover:scale-105 active:scale-95"
+           style="background: var(--accent); color: #042f2b;">Submit a command</a>
+        <a href={REPO} target="_blank" rel="noopener noreferrer"
+           class="rounded-full border px-5 py-2.5 text-sm font-semibold transition hover:scale-105 active:scale-95"
+           style="border-color: var(--border); background: var(--surface);">GitHub</a>
+      </div>
+      <p class="mt-1 text-xs" style="color: var(--muted);">Hover the bar at the top and pick a logo to filter.</p>
+    </header>
+
+    <div class="mb-5 flex items-center justify-between gap-3 px-1 text-sm" style="color: var(--muted);">
+      <span id="count" aria-live="polite"></span>
+      <button type="button" id="filter-pill" class="filter-pill" style="color: var(--text);" hidden>
+        <img id="filter-logo" src="" alt="" width="20" height="20" />
+        <span id="filter-name"></span>
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
+
+    <section class="flex flex-col gap-4" id="list">
+      {commands.map((cmd) => <CommandBar cmd={cmd} />)}
+    </section>
+
+    <div id="sentinel" class="h-px"></div>
+
+    <p id="empty" class="hidden py-20 text-center" style="color: var(--muted);">
+      Nothing found. Try another word, or <a class="underline" href={SUBMIT}>submit this command</a>.
+    </p>
+
+    <footer class="mt-16 text-center text-xs" style="color: var(--muted);">
+      Logos belong to their owners (Anthropic, OpenAI, Mistral AI, Google). MCP Corpus is not affiliated with them.
+    </footer>
+  </main>
+
+  <script>
+    const root = document.documentElement;
+    const island = document.getElementById('island')!;
+    const input = document.getElementById('search') as HTMLInputElement;
+    const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.agent-btn'));
+    const bars = Array.from(document.querySelectorAll<HTMLElement>('[data-bar]'));
+    const countEl = document.getElementById('count')!;
+    const emptyEl = document.getElementById('empty')!;
+    const pill = document.getElementById('filter-pill') as HTMLButtonElement;
+    const pillLogo = document.getElementById('filter-logo') as HTMLImageElement;
+    const pillName = document.getElementById('filter-name')!;
+    const sentinel = document.getElementById('sentinel')!;
+
+    const PAGE = 20; // how many bars show at first, and per "load more"
+    let agent = 'all';
+    let limit = PAGE;
+    let closeTimer: number | undefined;
+
+    /* ---------- Island: opens on hover or focus ---------- */
+    const open = () => { clearTimeout(closeTimer); island.dataset.open = 'true'; };
+    const close = () => { island.dataset.open = 'false'; };
+
+    island.addEventListener('pointerenter', open);
+    island.addEventListener('pointerleave', () => {
+      closeTimer = window.setTimeout(() => { if (document.activeElement !== input) close(); }, 180);
+    });
+    input.addEventListener('focus', open);
+    input.addEventListener('blur', () => { if (!island.matches(':hover')) close(); });
+    document.addEventListener('pointerdown', (e) => {
+      if (!island.contains(e.target as Node)) { input.blur(); close(); }
+    });
+
+    /* ---------- Lazy loading: bars fade in as they come into view ---------- */
+    const reveal = new IntersectionObserver(
+      (entries) => {
+        let i = 0;
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const el = entry.target as HTMLElement;
+          el.style.transitionDelay = `${Math.min(i++, 6) * 60}ms`;
+          el.classList.add('in');
+          reveal.unobserve(el);
+          setTimeout(() => { el.style.transitionDelay = ''; }, 900);
+        }
+      },
+      { rootMargin: '0px 0px -5% 0px', threshold: 0.05 }
+    );
+
+    // When you scroll near the bottom, show the next bars
+    const more = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) { limit += PAGE; apply(false); }
+      },
+      { rootMargin: '400px' }
+    );
+
+    /* ---------- Search + filter ---------- */
+    function apply(reset = true) {
+      if (reset) limit = PAGE;
+      const words = input.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+      let matched = 0;
+      for (const bar of bars) {
+        const text = bar.dataset.search ?? '';
+        const ok = (agent === 'all' || bar.dataset.agentId === agent) && words.every((w) => text.includes(w));
+        if (ok) matched++;
+        if (ok && matched <= limit) {
+          if (bar.hidden) {
+            bar.hidden = false;
+            bar.classList.remove('in');
+            reveal.observe(bar);
+          } else if (!bar.classList.contains('in')) {
+            reveal.observe(bar);
+          }
+        } else {
+          bar.hidden = true;
+          bar.classList.remove('in');
+          reveal.unobserve(bar);
+        }
+      }
+      countEl.textContent = `${matched} command${matched === 1 ? '' : 's'}`;
+      emptyEl.classList.toggle('hidden', matched !== 0);
+      more.unobserve(sentinel);
+      if (matched > limit) more.observe(sentinel);
+    }
+    input.addEventListener('input', () => apply());
+
+    /* ---------- Shockwave ---------- */
+    function shockwave(next: string, x: number, y: number) {
+      const commit = () => {
+        if (next === 'all') delete root.dataset.agent;
+        else root.dataset.agent = next;
+      };
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { commit(); return; }
+
+      const tint = next === 'all' ? 'none' : next;
+      const R = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 60;
+      const opts = { duration: 1100, easing: 'cubic-bezier(.25,.75,.25,1)', fill: 'forwards' as const };
+
+      // 1) a circle of the new color grows from the button
+      const wave = document.createElement('div');
+      wave.className = 'wave';
+      wave.dataset.agent = tint;
+      document.body.append(wave);
+      const grow = wave.animate(
+        [{ clipPath: `circle(0px at ${x}px ${y}px)` }, { clipPath: `circle(${R}px at ${x}px ${y}px)` }],
+        opts
+      );
+
+      // 2) a glowing ring rides on the edge of that circle
+      const ring = document.createElement('div');
+      ring.className = 'wave-ring';
+      ring.dataset.agent = tint;
+      ring.style.left = `${x}px`;
+      ring.style.top = `${y}px`;
+      document.body.append(ring);
+      ring.animate(
+        [
+          { width: '0px', height: '0px', opacity: 1 },
+          { width: `${R * 2}px`, height: `${R * 2}px`, opacity: 0.15 },
+        ],
+        opts
+      );
+
+      // 3) when it has covered the screen, make the new colors the real ones
+      grow.finished.then(() => { commit(); wave.remove(); ring.remove(); });
+    }
+
+    function setAgent(next: string, x: number, y: number) {
+      agent = next;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.agentId === agent)));
+      const active = buttons.find((b) => b.dataset.agentId === agent);
+      pill.hidden = !active;
+      if (active) {
+        pillName.textContent = active.textContent?.trim() ?? '';
+        pillLogo.src = active.querySelector('img')!.src;
+      }
+      shockwave(next, x, y);
+      apply();
+    }
+
+    buttons.forEach((btn) =>
+      btn.addEventListener('click', () => {
+        const r = btn.getBoundingClientRect();
+        const id = btn.dataset.agentId!;
+        // clicking the active logo again turns the filter off
+        setAgent(agent === id ? 'all' : id, r.left + r.width / 2, r.top + r.height / 2);
+      })
+    );
+    pill.addEventListener('click', () => {
+      const r = pill.getBoundingClientRect();
+      setAgent('all', r.left + r.width / 2, r.top + r.height / 2);
+    });
+
+    /* ---------- Keyboard + copy ---------- */
+    document.addEventListener('keydown', (e) => {
+      const typing = ['INPUT', 'TEXTAREA'].includes((e.target as HTMLElement).tagName);
+      if ((e.key === '/' && !typing) || ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k')) {
+        e.preventDefault();
+        input.focus();
+      } else if (e.key === 'Escape') {
+        input.blur();
+        close();
+      }
+    });
+
+    document.addEventListener('click', async (e) => {
+      const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-copy]');
+      if (!btn) return;
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copy ?? '');
+        btn.textContent = 'Copied!';
+        btn.dataset.copied = 'true';
+        setTimeout(() => { btn.textContent = 'Copy'; delete btn.dataset.copied; }, 1400);
+      } catch {
+        btn.textContent = 'Press Ctrl+C';
+      }
+    });
+
+    apply();
+  </script>
+</Layout>

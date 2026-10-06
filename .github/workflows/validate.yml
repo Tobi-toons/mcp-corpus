@@ -1,0 +1,26 @@
+name: Validate commands
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Read-only on purpose. This workflow never needs to write anything.
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # --ignore-scripts: packages can't run their own install scripts here
+      - run: npm ci --ignore-scripts
+
+      - run: node scripts/validate-commands.mjs

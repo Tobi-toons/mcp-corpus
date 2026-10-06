@@ -1,0 +1,11 @@
+id: claude-code-mcp-list
+name: List MCP servers
+agent: claude-code
+type: cli-command
+command: claude mcp list
+description: Shows the MCP servers that are set up for Claude Code.
+tags: [mcp, setup]
+source_url: https://docs.claude.com/en/docs/claude-code/mcp
+last_verified: 2026-10-06
+risk: []
+author: Tobi-toons

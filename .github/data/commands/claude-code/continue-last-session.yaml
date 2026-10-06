@@ -1,0 +1,11 @@
+id: claude-code-continue
+name: Continue the last session
+agent: claude-code
+type: cli-command
+command: claude --continue
+description: Opens Claude Code and continues the most recent conversation in the current folder.
+tags: [session, resume]
+source_url: https://docs.claude.com/en/docs/claude-code/cli-reference
+last_verified: 2026-10-06
+risk: []
+author: Tobi-toons

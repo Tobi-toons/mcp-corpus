@@ -1,0 +1,86 @@
+name: Submit a command
+description: Suggest a command for the MCP Corpus library
+title: "[Command] "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for contributing. A maintainer reads every submission before it is added.
+        Please read CONTRIBUTING.md first.
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Agent or tool
+      options:
+        - Claude Code
+        - Codex
+        - Antigravity
+        - Mistral Vibe
+        - MCP tool or skill
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - CLI command
+        - Slash command
+        - Flag
+        - MCP install
+        - Skill
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Short title
+      placeholder: Continue the last session
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: The command
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What does it do?
+      description: Use plain words. Say everything the command does.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Official source link
+      placeholder: https://
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Agent version you tested on
+  - type: checkboxes
+    id: risk
+    attributes:
+      label: Risk labels (tick all that apply)
+      options:
+        - label: Runs shell commands
+        - label: Uses the network
+        - label: Writes files
+        - label: Deletes files
+        - label: Installs software
+        - label: Needs secrets or keys
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: I ran this command myself and it works
+          required: true
+        - label: It has no real keys, tokens, or hidden code
+          required: true

@@ -1,0 +1,11 @@
+id: codex-exec
+name: Run one task without the chat screen
+agent: codex
+type: cli-command
+command: codex exec "explain what this project does"
+description: Runs Codex once with your prompt, prints the answer, and exits. Good for scripts.
+tags: [non-interactive, scripts]
+source_url: https://developers.openai.com/codex/cli
+last_verified: 2026-10-06
+risk: []
+author: Tobi-toons

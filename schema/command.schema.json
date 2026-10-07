@@ -7,7 +7,7 @@
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$", "maxLength": 80 },
     "name": { "type": "string", "minLength": 3, "maxLength": 80 },
-    "agent": { "enum": ["claude-code", "codex", "antigravity", "mistral-vibe", "mcp"] },
+    "agent": { "enum": ["claude-code", "codex", "cursor", "antigravity", "mistral-vibe", "mcp"] },
     "type": { "enum": ["cli-command", "slash-command", "flag", "mcp-install", "skill"] },
     "command": { "type": "string", "minLength": 1, "maxLength": 500 },
     "description": { "type": "string", "minLength": 10, "maxLength": 500 },

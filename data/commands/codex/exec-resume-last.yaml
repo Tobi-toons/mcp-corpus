@@ -1,0 +1,13 @@
+id: codex-exec-resume-last
+name: Follow up on the last run
+agent: codex
+type: cli-command
+command: codex exec resume --last "Now fix the issues you found"
+description: Continues the most recent non-interactive run in this folder with a new instruction.
+tags:
+  - session
+  - non-interactive
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

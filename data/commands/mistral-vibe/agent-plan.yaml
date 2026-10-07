@@ -1,0 +1,13 @@
+id: vibe-agent-plan
+name: Plan only, without changes
+agent: mistral-vibe
+type: flag
+command: vibe --agent plan
+description: Starts Vibe with the plan agent, a built-in mode meant for planning.
+tags:
+  - agents
+  - safety
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

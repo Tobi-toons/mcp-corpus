@@ -1,0 +1,13 @@
+id: codex-login-status
+name: Check if you are signed in
+agent: codex
+type: cli-command
+command: codex login status
+description: Shows how you are signed in. It exits with 0 when you are logged in, which helps in scripts.
+tags:
+  - auth
+  - scripts
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

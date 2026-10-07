@@ -1,0 +1,14 @@
+id: vibe-agent-accept-edits
+name: Accept file edits automatically
+agent: mistral-vibe
+type: flag
+command: vibe --agent accept-edits
+description: Starts Vibe with the accept-edits agent, which approves file edits for you.
+tags:
+  - agents
+  - approvals
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk:
+  - writes-files
+author: Tobi-toons

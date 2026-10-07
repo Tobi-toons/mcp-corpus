@@ -1,0 +1,14 @@
+id: vibe-max-price
+name: Set a cost limit
+agent: mistral-vibe
+type: flag
+command: vibe --prompt "Analyze the codebase" --max-turns 5 --max-price 1.0
+description: Stops the run when the cost reaches the limit you set. Good for scripts that use the paid API.
+tags:
+  - non-interactive
+  - cost
+  - safety
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

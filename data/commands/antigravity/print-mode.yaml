@@ -1,0 +1,13 @@
+id: antigravity-print-mode
+name: Ask once and print the answer
+agent: antigravity
+type: flag
+command: agy -p "Explain the architecture of this codebase"
+description: Runs one prompt, prints the answer, and exits.
+tags:
+  - non-interactive
+  - scripts
+source_url: https://www.gradually.ai/en/antigravity-cli-commands/
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

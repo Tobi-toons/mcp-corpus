@@ -1,0 +1,16 @@
+id: codex-mcp-add-stdio
+name: Add a local MCP server
+agent: codex
+type: mcp-install
+command: codex mcp add <name> -- <command...>
+description: Saves an MCP server that Codex starts on your computer. Everything after the -- is the start command. Add --env KEY=VALUE to pass settings.
+tags:
+  - mcp
+  - setup
+  - stdio
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk:
+  - runs-shell
+  - writes-files
+author: Tobi-toons

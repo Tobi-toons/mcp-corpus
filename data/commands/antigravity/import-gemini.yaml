@@ -1,0 +1,14 @@
+id: antigravity-import-gemini
+name: Bring over your Gemini CLI settings
+agent: antigravity
+type: cli-command
+command: agy plugin import gemini
+description: Reads your old Gemini CLI settings and MCP servers and brings them into Antigravity CLI.
+tags:
+  - migration
+  - mcp
+source_url: https://docs.flutter.cn/ai/antigravity-cli
+last_verified: 2026-10-07
+risk:
+  - writes-files
+author: Tobi-toons

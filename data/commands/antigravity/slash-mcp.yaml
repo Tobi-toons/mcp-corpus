@@ -1,0 +1,12 @@
+id: antigravity-slash-mcp
+name: Manage MCP servers
+agent: antigravity
+type: slash-command
+command: /mcp
+description: Opens the MCP server manager, so you can see which servers are connected.
+tags:
+  - mcp
+source_url: https://codelabs.developers.google.com/antigravity-cli-hands-on
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

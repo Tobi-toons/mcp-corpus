@@ -1,0 +1,14 @@
+id: cursor-stream-partial
+name: Stream the answer word by word
+agent: cursor
+type: flag
+command: agent -p "task" --output-format stream-json --stream-partial-output
+description: Streams small pieces of text as the agent writes them. Needs -p and stream-json.
+tags:
+  - non-interactive
+  - json
+  - streaming
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

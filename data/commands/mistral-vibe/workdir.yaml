@@ -1,0 +1,12 @@
+id: vibe-workdir
+name: Choose the project folder
+agent: mistral-vibe
+type: flag
+command: vibe --workdir /path/to/project
+description: Starts Vibe in a folder you choose, without having to cd into it first.
+tags:
+  - folders
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

@@ -1,0 +1,12 @@
+id: codex-mcp-list
+name: List MCP servers
+agent: codex
+type: cli-command
+command: codex mcp list
+description: Lists every MCP server saved in your Codex config. Add --json for machine-readable output.
+tags:
+  - mcp
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

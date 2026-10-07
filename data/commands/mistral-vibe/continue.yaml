@@ -1,0 +1,13 @@
+id: vibe-continue
+name: Continue the last session
+agent: mistral-vibe
+type: flag
+command: vibe --continue
+description: Opens your most recent session again. The short form is -c.
+tags:
+  - session
+  - resume
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

@@ -1,0 +1,14 @@
+id: cursor-mcp-login
+name: Sign in to an MCP server
+agent: cursor
+type: cli-command
+command: agent mcp login <identifier>
+description: Signs in to an MCP server that you set up in .cursor/mcp.json.
+tags:
+  - mcp
+  - auth
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk:
+  - uses-network
+author: Tobi-toons

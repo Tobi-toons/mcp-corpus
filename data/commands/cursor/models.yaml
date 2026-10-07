@@ -1,0 +1,13 @@
+id: cursor-models
+name: List available models
+agent: cursor
+type: cli-command
+command: agent models
+description: Shows all the models you can use with your account.
+tags:
+  - models
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk:
+  - uses-network
+author: Tobi-toons

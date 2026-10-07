@@ -1,0 +1,14 @@
+id: codex-exec-json
+name: Run once and print JSON events
+agent: codex
+type: flag
+command: codex exec --json "summarize this repo"
+description: Runs one task and prints one JSON line for every step, so a script can follow along.
+tags:
+  - non-interactive
+  - scripts
+  - json
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

@@ -1,0 +1,13 @@
+id: codex-review-base
+name: Review your branch against main
+agent: codex
+type: cli-command
+command: codex review --base main
+description: Reviews all the changes on your branch compared to the base branch you choose.
+tags:
+  - review
+  - git
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

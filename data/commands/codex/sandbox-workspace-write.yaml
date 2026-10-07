@@ -1,0 +1,16 @@
+id: codex-sandbox-workspace-write
+name: Safe settings for everyday work
+agent: codex
+type: flag
+command: codex --sandbox workspace-write --ask-for-approval on-request
+description: Lets Codex edit files in your project, and asks you before it does anything bigger. Recommended by the docs for local work.
+tags:
+  - sandbox
+  - approvals
+  - safety
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk:
+  - runs-shell
+  - writes-files
+author: Tobi-toons

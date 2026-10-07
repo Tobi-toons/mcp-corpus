@@ -1,0 +1,12 @@
+id: vibe-start
+name: Start Mistral Vibe
+agent: mistral-vibe
+type: cli-command
+command: vibe
+description: Opens the Mistral Vibe chat screen in your project folder. The first time, it helps you add your API key.
+tags:
+  - start
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

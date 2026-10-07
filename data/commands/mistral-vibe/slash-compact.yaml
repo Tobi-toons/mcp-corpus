@@ -1,0 +1,12 @@
+id: vibe-slash-compact
+name: Shorten a long chat
+agent: mistral-vibe
+type: slash-command
+command: /compact
+description: Sums up your chat history so it takes less space. You can add instructions for what the summary should keep.
+tags:
+  - context
+source_url: https://docs.mistral.ai/vibe/code/cli/commands-shortcuts
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

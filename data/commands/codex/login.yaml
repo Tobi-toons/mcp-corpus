@@ -1,0 +1,14 @@
+id: codex-login
+name: Sign in to Codex
+agent: codex
+type: cli-command
+command: codex login
+description: Opens your browser so you can sign in with your ChatGPT account. Use --device-auth if no browser can open.
+tags:
+  - setup
+  - auth
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk:
+  - uses-network
+author: Tobi-toons

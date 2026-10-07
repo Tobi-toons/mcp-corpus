@@ -1,0 +1,17 @@
+id: antigravity-install-windows
+name: Install Antigravity CLI (Windows)
+agent: antigravity
+type: cli-command
+command: irm https://antigravity.google/cli/install.ps1 | iex
+description: Installs the Antigravity CLI on Windows with PowerShell.
+tags:
+  - install
+  - setup
+  - windows
+source_url: https://codelabs.developers.google.com/antigravity-cli-hands-on
+last_verified: 2026-10-07
+risk:
+  - uses-network
+  - installs-software
+  - runs-shell
+author: Tobi-toons

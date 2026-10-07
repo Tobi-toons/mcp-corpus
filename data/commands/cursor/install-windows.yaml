@@ -1,0 +1,17 @@
+id: cursor-install-windows
+name: Install Cursor CLI (Windows)
+agent: cursor
+type: cli-command
+command: irm 'https://cursor.com/install?win32=true' | iex
+description: Installs the Cursor CLI on Windows with PowerShell.
+tags:
+  - install
+  - setup
+  - windows
+source_url: https://cursor.com/docs/cli/installation
+last_verified: 2026-10-07
+risk:
+  - uses-network
+  - installs-software
+  - runs-shell
+author: Tobi-toons

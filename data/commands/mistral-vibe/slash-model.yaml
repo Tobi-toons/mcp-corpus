@@ -1,0 +1,12 @@
+id: vibe-slash-model
+name: Pick the model
+agent: mistral-vibe
+type: slash-command
+command: /model
+description: Lets you choose which model Vibe uses right now.
+tags:
+  - models
+source_url: https://docs.mistral.ai/vibe/code/cli/commands-shortcuts
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

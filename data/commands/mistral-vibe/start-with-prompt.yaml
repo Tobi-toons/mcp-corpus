@@ -1,0 +1,12 @@
+id: vibe-start-with-prompt
+name: Start with a first request
+agent: mistral-vibe
+type: cli-command
+command: vibe "Refactor the main function in cli/main.py to be more modular."
+description: Opens Vibe and sends your first request right away.
+tags:
+  - start
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

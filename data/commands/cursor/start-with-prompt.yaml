@@ -1,0 +1,12 @@
+id: cursor-start-with-prompt
+name: Start a chat with a first request
+agent: cursor
+type: cli-command
+command: agent "add error handling to this API"
+description: Opens the Cursor agent and sends your first request right away. Older installs call the command cursor-agent.
+tags:
+  - start
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

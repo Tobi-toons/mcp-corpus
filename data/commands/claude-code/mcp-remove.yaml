@@ -1,0 +1,14 @@
+id: claude-code-mcp-remove
+name: Remove an MCP server
+agent: claude-code
+type: cli-command
+command: claude mcp remove <name>
+description: Removes an MCP server from your Claude Code settings.
+tags:
+  - mcp
+  - setup
+source_url: https://docs.claude.com/en/docs/claude-code/mcp
+last_verified: 2026-10-07
+risk:
+  - writes-files
+author: Tobi-toons

@@ -3,7 +3,7 @@
 An open-source library of commands for AI coding agents and MCP tools.
 Find the right command fast, copy it, and know what it does before you run it.
 
-**Covers (and growing):** Claude Code, Codex, Antigravity, Mistral Vibe, and MCP tools and skills.
+**Covers (and growing):** Claude Code, Codex, Cursor, Antigravity, Mistral Vibe, and MCP tools and skills.
 
 > **Status:** early. The data format is ready and the website is being built.
 

@@ -1,0 +1,13 @@
+id: codex-doctor
+name: Check if Codex is set up right
+agent: codex
+type: cli-command
+command: codex doctor
+description: Makes a report about your install, config, sign-in, Git, and terminal. Run it before you ask for help.
+tags:
+  - setup
+  - debug
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

@@ -1,0 +1,13 @@
+id: antigravity-conversation-by-id
+name: Open a chat by its ID
+agent: antigravity
+type: flag
+command: agy --conversation <id>
+description: Opens one specific earlier conversation by its ID.
+tags:
+  - session
+  - resume
+source_url: https://www.codeagentswarm.com/en/guides/how-to-use-antigravity-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

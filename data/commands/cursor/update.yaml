@@ -1,0 +1,15 @@
+id: cursor-update
+name: Update Cursor CLI
+agent: cursor
+type: cli-command
+command: agent update
+description: Updates the Cursor CLI to the newest version. It also tries to update by itself.
+tags:
+  - setup
+  - update
+source_url: https://cursor.com/docs/cli/installation
+last_verified: 2026-10-07
+risk:
+  - uses-network
+  - installs-software
+author: Tobi-toons

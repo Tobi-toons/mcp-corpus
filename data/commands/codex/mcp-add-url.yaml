@@ -1,0 +1,16 @@
+id: codex-mcp-add-url
+name: Add a remote MCP server
+agent: codex
+type: mcp-install
+command: codex mcp add <name> --url https://example.com/mcp
+description: Saves a remote MCP server that Codex reaches over streamable HTTP.
+tags:
+  - mcp
+  - setup
+  - http
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk:
+  - uses-network
+  - writes-files
+author: Tobi-toons

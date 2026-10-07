@@ -1,0 +1,14 @@
+id: codex-exec-output-file
+name: Save the final answer to a file
+agent: codex
+type: flag
+command: codex exec --output-last-message answer.txt "summarize this repo"
+description: Runs one task and writes only the last message into a file. Useful in scripts.
+tags:
+  - non-interactive
+  - scripts
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk:
+  - writes-files
+author: Tobi-toons

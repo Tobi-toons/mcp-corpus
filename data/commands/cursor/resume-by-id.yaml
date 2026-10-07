@@ -1,0 +1,13 @@
+id: cursor-resume-by-id
+name: Resume a chat by its ID
+agent: cursor
+type: flag
+command: agent --resume abc123
+description: Opens one specific chat session by its ID. Use agent ls to find the IDs.
+tags:
+  - session
+  - resume
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

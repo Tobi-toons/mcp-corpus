@@ -1,1 +1,378 @@
-   @import "tailwindcss";
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============ Colors ============
+   --base-* are the normal theme colors (light and dark).
+   When a filter is on, the page gets data-agent="..." and the
+   colors are re-made from the brand color of that agent. */
+:root {
+  --base-bg: #f6f8f8;
+  --base-surface: #ffffff;
+  --base-border: #dde4e4;
+  --base-accent: #0d9488;
+  --base-soft: rgba(13, 148, 136, 0.12);
+  --base-code: #0f1b1b;
+  --text: #0f1b1b;
+  --muted: #5b6b6b;
+  --code-text: #b6f5ea;
+  --shadow: 0 1px 2px rgba(15, 27, 27, 0.06), 0 8px 24px rgba(15, 27, 27, 0.06);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dark {
+  --base-bg: #070d0d;
+  --base-surface: #0f1717;
+  --base-border: #1f2d2d;
+  --base-accent: #2dd4bf;
+  --base-soft: rgba(45, 212, 191, 0.14);
+  --base-code: #050909;
+  --text: #e8f3f2;
+  --muted: #8fa5a3;
+  --code-text: #9ff3e4;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 30px rgba(0, 0, 0, 0.35);
+}
+
+:root, [data-agent="none"] {
+  --bg: var(--base-bg);
+  --surface: var(--base-surface);
+  --border: var(--base-border);
+  --accent: var(--base-accent);
+  --accent-soft: var(--base-soft);
+  --code-bg: var(--base-code);
+}
+
+[data-agent="claude-code"] { --brand: #d97757; }
+[data-agent="codex"] { --brand: #7c8cff; }
+[data-agent="cursor"] { --brand: #8b98a8; }
+[data-agent="mistral-vibe"] { --brand: #fa520f; }
+[data-agent="antigravity"] { --brand: #4285f4; }
+
+/* Dark mode: a deep, dark shade of the brand color */
+.dark[data-agent]:not([data-agent="none"]),
+.dark [data-agent]:not([data-agent="none"]) {
+  --bg: color-mix(in srgb, var(--brand) 20%, #050707);
+  --surface: color-mix(in srgb, var(--brand) 14%, #0a0d0d);
+  --border: color-mix(in srgb, var(--brand) 32%, #0f1313);
+  --accent: color-mix(in srgb, var(--brand) 82%, #fff);
+  --accent-soft: color-mix(in srgb, var(--brand) 32%, transparent);
+  --code-bg: color-mix(in srgb, var(--brand) 8%, #030505);
+}
+/* Light mode: a soft tint of the brand color */
+:root:not(.dark)[data-agent]:not([data-agent="none"]),
+:root:not(.dark) [data-agent]:not([data-agent="none"]) {
+  --bg: color-mix(in srgb, var(--brand) 16%, #ffffff);
+  --surface: color-mix(in srgb, var(--brand) 6%, #ffffff);
+  --border: color-mix(in srgb, var(--brand) 30%, #ffffff);
+  --accent: color-mix(in srgb, var(--brand) 80%, #000);
+  --accent-soft: color-mix(in srgb, var(--brand) 30%, transparent);
+  --code-bg: color-mix(in srgb, var(--brand) 12%, #0f1b1b);
+}
+
+html {
+  background: var(--page-bg, var(--bg));
+  color: var(--text);
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+html.dark { color-scheme: dark; }
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  min-height: 100vh;
+  background:
+    radial-gradient(60rem 30rem at 50% -10%, var(--page-soft, var(--accent-soft)), transparent 70%),
+    var(--page-bg, var(--bg));
+}
+
+.mono {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+/* Layers, from back to front:
+   wave (0) -> bouncing logos (1) -> page content (2) -> island (50) */
+.page { position: relative; z-index: 2; }
+
+/* ============ Shockwave ============ */
+.wave {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 30rem at 50% -10%, var(--accent-soft), transparent 70%),
+    var(--bg);
+}
+.wave-ring {
+  position: fixed;
+  z-index: 1;
+  pointer-events: none;
+  translate: -50% -50%;
+  border-radius: 50%;
+  border: 4px solid color-mix(in srgb, var(--brand, #2dd4bf) 65%, #fff);
+  box-shadow:
+    0 0 50px 8px color-mix(in srgb, var(--brand, #2dd4bf) 55%, transparent),
+    inset 0 0 50px 8px color-mix(in srgb, var(--brand, #2dd4bf) 40%, transparent);
+}
+
+/* Black logos (Cursor) turn white on dark backgrounds */
+.dark .logo-mono, .island .logo-mono { filter: invert(1); }
+
+/* ============ Colors fade in with the shockwave ============
+   JS sets --wd (a delay) on each element, based on how far it is
+   from the click, so the color arrives when the wave reaches it. */
+.fade-colors {
+  transition:
+    color 0.5s ease var(--wd, 0ms),
+    background-color 0.5s ease var(--wd, 0ms),
+    border-color 0.5s ease var(--wd, 0ms),
+    transform 0.2s ease;
+}
+
+/* ============ Bouncing logos ============ */
+#bouncers {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.bouncer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  opacity: 0.6;
+  will-change: transform;
+}
+.bouncer img { display: block; width: 100%; height: 100%; }
+.hit-ring {
+  position: absolute;
+  translate: -50% -50%;
+  border: 2px solid;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+}
+@media (max-width: 640px) {
+  .bouncer { width: 42px; height: 42px; }
+}
+
+/* ============ Dynamic island ============ */
+.island {
+  position: fixed;
+  top: 14px;
+  left: 50%;
+  translate: -50% 0;
+  z-index: 50;
+  width: 230px;
+  max-width: calc(100vw - 24px);
+  background: #000;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  /* One fixed radius the whole time, so it is always a smooth pill and never turns from a rectangle */
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  transition: width 0.6s var(--ease), box-shadow 0.4s ease;
+}
+.island[data-open="true"] {
+  width: 740px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--accent);
+}
+
+/* Logo buttons live in a panel that opens above the search bar */
+.island-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.6s var(--ease), opacity 0.3s ease;
+}
+.island[data-open="true"] .island-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+.island-panel > div { overflow: hidden; min-height: 0; }
+.logo-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px 30px 6px;
+}
+
+.agent-btn {
+  --brand: #fff;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 16px 9px 11px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: 13px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.agent-btn img { width: 22px; height: 22px; flex: none; }
+.agent-btn:hover { transform: translateY(-2px); border-color: var(--brand); }
+.agent-btn:active { transform: scale(0.95); }
+.agent-btn[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--brand) 38%, #000);
+  border-color: var(--brand);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brand) 50%, transparent);
+}
+/* The buttons slide in one after another when the island opens */
+.island:not([data-open="true"]) .agent-btn { opacity: 0; }
+.island[data-open="true"] .agent-btn {
+  animation: slide-in 0.55s var(--ease) backwards;
+  animation-delay: calc(var(--n) * 60ms + 100ms);
+}
+@keyframes slide-in {
+  from { opacity: 0; transform: translateY(-16px) scale(0.85); }
+}
+
+.island-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 20px 0 18px;
+}
+.island-input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  font-size: 15px;
+}
+.island-input::placeholder { color: rgba(255, 255, 255, 0.55); }
+.island-kbd {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.6);
+  transition: opacity 0.2s ease;
+}
+.island[data-open="true"] .island-kbd { opacity: 0; }
+
+@media (max-width: 720px) {
+  .island { border-radius: 30px; }
+  .logo-row { flex-wrap: wrap; padding: 16px 18px 6px; }
+  .agent-btn { flex: 1 1 42%; justify-content: center; }
+}
+
+/* ============ Command bars ============ */
+.bar {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 18px 28px;
+  align-items: center;
+  padding: 18px 22px;
+  background: color-mix(in srgb, var(--surface) 74%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  /* hidden until it scrolls into view */
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s var(--ease),
+    border-color 0.5s ease var(--wd, 0ms),
+    background-color 0.5s ease var(--wd, 0ms);
+}
+.bar.in { opacity: 1; transform: none; }
+.bar.in:hover { transform: translateY(-2px); border-color: var(--accent); }
+.bar[hidden] { display: none; }
+@media (max-width: 800px) {
+  .bar { grid-template-columns: minmax(0, 1fr); }
+}
+
+.code-box {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 14px;
+  background: var(--code-bg);
+  color: var(--code-text);
+  border-radius: 13px;
+  transition: background-color 0.5s ease var(--wd, 0ms);
+}
+.code-box code {
+  flex: 1;
+  min-width: 0;
+  font-size: 13px;
+  line-height: 1.6;
+  /* long commands wrap, so you can always read all of them */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.badge {
+  font-size: 11.5px;
+  padding: 3px 9px;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  transition: color 0.5s ease var(--wd, 0ms), border-color 0.5s ease var(--wd, 0ms);
+}
+.badge-warn {
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.1);
+}
+.dark .badge-warn { color: #fbbf24; }
+
+.copy-btn {
+  flex: none;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e8f3f2;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.copy-btn:hover { background: rgba(255, 255, 255, 0.12); }
+.copy-btn:active { transform: scale(0.94); }
+.copy-btn[data-copied="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #042f2b;
+  animation: pop 0.35s ease;
+}
+@keyframes pop { 50% { transform: scale(1.12); } }
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px 5px 8px;
+  border-radius: 9999px;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  font-size: 13px;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    color 0.5s ease var(--wd, 0ms),
+    background-color 0.5s ease var(--wd, 0ms),
+    border-color 0.5s ease var(--wd, 0ms);
+}
+.filter-pill:hover { transform: scale(1.04); }
+.filter-pill[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,13 @@
+id: codex-resume-last
+name: Continue the last chat
+agent: codex
+type: cli-command
+command: codex resume --last
+description: Opens your most recent chat so you can keep going.
+tags:
+  - session
+  - resume
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

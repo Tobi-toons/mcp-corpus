@@ -1,0 +1,13 @@
+id: vibe-resume-by-id
+name: Resume a session by its ID
+agent: mistral-vibe
+type: flag
+command: vibe --resume abc123
+description: Opens a specific earlier session. A part of the session ID is enough.
+tags:
+  - session
+  - resume
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

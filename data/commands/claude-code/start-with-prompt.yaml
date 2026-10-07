@@ -1,0 +1,12 @@
+id: claude-code-start-with-prompt
+name: Start a chat with a first question
+agent: claude-code
+type: cli-command
+command: claude "explain this project"
+description: Opens Claude Code and sends your first question right away, so you do not have to type it after it starts.
+tags:
+  - start
+source_url: https://docs.claude.com/en/docs/claude-code/cli-reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

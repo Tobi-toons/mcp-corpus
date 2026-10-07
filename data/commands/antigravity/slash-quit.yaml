@@ -1,0 +1,12 @@
+id: antigravity-slash-quit
+name: Quit the CLI
+agent: antigravity
+type: slash-command
+command: /quit
+description: Closes the Antigravity CLI. Pressing Ctrl+D twice works too.
+tags:
+  - exit
+source_url: https://codelabs.developers.google.com/antigravity-cli-hands-on
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

@@ -1,0 +1,15 @@
+id: cursor-print-mode
+name: Ask once and print the answer
+agent: cursor
+type: flag
+command: agent -p "List all TODO comments in this repo"
+description: Runs one task, prints the answer, and exits. In this mode the agent can use all its tools, including writing files and running shell commands.
+tags:
+  - non-interactive
+  - scripts
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk:
+  - runs-shell
+  - writes-files
+author: Tobi-toons

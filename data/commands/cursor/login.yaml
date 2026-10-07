@@ -1,0 +1,14 @@
+id: cursor-login
+name: Sign in to Cursor
+agent: cursor
+type: cli-command
+command: agent login
+description: Signs you in to your Cursor account.
+tags:
+  - setup
+  - auth
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk:
+  - uses-network
+author: Tobi-toons

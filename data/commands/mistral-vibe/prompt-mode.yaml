@@ -1,0 +1,14 @@
+id: vibe-prompt-mode
+name: Run one task without the chat screen
+agent: mistral-vibe
+type: flag
+command: vibe --prompt "Analyze the codebase" --max-turns 5 --output json
+description: Runs one task and prints the result as JSON, then exits. --max-turns limits how many steps it can take.
+tags:
+  - non-interactive
+  - scripts
+  - json
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

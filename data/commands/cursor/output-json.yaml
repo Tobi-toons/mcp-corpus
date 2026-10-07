@@ -1,0 +1,14 @@
+id: cursor-output-json
+name: Get the answer as JSON
+agent: cursor
+type: flag
+command: agent -p "task" --output-format json
+description: Prints the final answer as JSON. This only works together with -p. Other formats are text and stream-json.
+tags:
+  - non-interactive
+  - scripts
+  - json
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

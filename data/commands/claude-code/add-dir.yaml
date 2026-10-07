@@ -1,0 +1,14 @@
+id: claude-code-add-dir
+name: Give access to more folders
+agent: claude-code
+type: flag
+command: claude --add-dir ../apps ../lib
+description: Lets Claude read and edit extra folders next to your project. Each path must be a real folder.
+tags:
+  - context
+  - folders
+source_url: https://docs.claude.com/en/docs/claude-code/cli-reference
+last_verified: 2026-10-07
+risk:
+  - writes-files
+author: Tobi-toons

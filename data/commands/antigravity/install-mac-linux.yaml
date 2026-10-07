@@ -1,0 +1,16 @@
+id: antigravity-install-mac-linux
+name: Install Antigravity CLI (macOS, Linux)
+agent: antigravity
+type: cli-command
+command: curl -fsSL https://antigravity.google/cli/install.sh | bash
+description: Downloads and installs the Antigravity CLI. After it finishes, the command to run is agy.
+tags:
+  - install
+  - setup
+source_url: https://codelabs.developers.google.com/antigravity-cli-hands-on
+last_verified: 2026-10-07
+risk:
+  - uses-network
+  - installs-software
+  - runs-shell
+author: Tobi-toons

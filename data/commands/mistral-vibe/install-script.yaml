@@ -1,0 +1,16 @@
+id: vibe-install-script
+name: Install Mistral Vibe
+agent: mistral-vibe
+type: cli-command
+command: curl -LsSf https://mistral.ai/vibe/install.sh | bash
+description: "Downloads and installs Mistral Vibe with one command. You can also use: uv tool install mistral-vibe"
+tags:
+  - install
+  - setup
+source_url: https://github.com/mistralai/mistral-vibe
+last_verified: 2026-10-07
+risk:
+  - uses-network
+  - installs-software
+  - runs-shell
+author: Tobi-toons

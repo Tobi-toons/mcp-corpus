@@ -1,0 +1,12 @@
+id: antigravity-slash-help
+name: Show help inside the chat
+agent: antigravity
+type: slash-command
+command: /help
+description: Shows the available commands and keyboard shortcuts.
+tags:
+  - help
+source_url: https://codelabs.developers.google.com/antigravity-cli-hands-on
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

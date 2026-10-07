@@ -1,0 +1,12 @@
+id: vibe-slash-config
+name: Change settings inside Vibe
+agent: mistral-vibe
+type: slash-command
+command: /config
+description: Opens the settings so you can change them while you chat. /model and /thinking help too.
+tags:
+  - config
+source_url: https://docs.mistral.ai/vibe/code/cli/commands-shortcuts
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

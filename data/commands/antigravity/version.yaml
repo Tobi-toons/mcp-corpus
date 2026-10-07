@@ -1,0 +1,12 @@
+id: antigravity-version
+name: Check the version
+agent: antigravity
+type: cli-command
+command: agy --version
+description: Prints the version of the Antigravity CLI. A quick way to check that the install worked.
+tags:
+  - setup
+source_url: https://codelabs.developers.google.com/antigravity-cli-hands-on
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

@@ -1,0 +1,13 @@
+id: codex-live-search
+name: Turn on live web search
+agent: codex
+type: flag
+command: codex --search "what changed in the latest release?"
+description: Lets Codex browse the live web. Without this flag it uses cached search results.
+tags:
+  - web-search
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk:
+  - uses-network
+author: Tobi-toons

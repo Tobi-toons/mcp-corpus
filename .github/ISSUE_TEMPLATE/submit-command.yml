@@ -15,6 +15,7 @@ body:
       options:
         - Claude Code
         - Codex
+        - Cursor
         - Antigravity
         - Mistral Vibe
         - MCP tool or skill

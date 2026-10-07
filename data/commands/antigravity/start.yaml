@@ -1,0 +1,12 @@
+id: antigravity-start
+name: Start Antigravity CLI
+agent: antigravity
+type: cli-command
+command: agy
+description: Opens the Antigravity chat in your terminal. The first time, you sign in with your Google account.
+tags:
+  - start
+source_url: https://codelabs.developers.google.com/antigravity-cli-hands-on
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

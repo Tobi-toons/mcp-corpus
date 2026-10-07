@@ -1,0 +1,12 @@
+id: cursor-mcp-list
+name: List MCP servers
+agent: cursor
+type: cli-command
+command: agent mcp list
+description: Lists your MCP servers and whether they work.
+tags:
+  - mcp
+source_url: https://cursor.com/docs/cli/reference/parameters
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

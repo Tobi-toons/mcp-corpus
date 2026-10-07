@@ -1,0 +1,16 @@
+id: antigravity-skip-permissions
+name: Skip all permission questions
+agent: antigravity
+type: flag
+command: agy --dangerously-skip-permissions
+description: Stops asking for permission before it runs actions. Only use it in a safe, throw-away project.
+tags:
+  - approvals
+  - safety
+source_url: https://www.gradually.ai/en/antigravity-cli-commands/
+last_verified: 2026-10-07
+risk:
+  - runs-shell
+  - writes-files
+  - deletes-files
+author: Tobi-toons

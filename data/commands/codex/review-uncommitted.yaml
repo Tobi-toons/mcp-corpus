@@ -1,0 +1,13 @@
+id: codex-review-uncommitted
+name: Review your unsaved changes
+agent: codex
+type: cli-command
+command: codex review --uncommitted
+description: Reviews your staged, unstaged, and new files without opening the chat screen.
+tags:
+  - review
+  - git
+source_url: https://developers.openai.com/codex/cli/reference
+last_verified: 2026-10-07
+risk: []
+author: Tobi-toons

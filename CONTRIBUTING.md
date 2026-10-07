@@ -34,7 +34,7 @@ The full rules are in `schema/command.schema.json`.
 |---|---|---|
 | `id` | yes | lowercase letters, numbers, and dashes |
 | `name` | yes | short title |
-| `agent` | yes | `claude-code`, `codex`, `antigravity`, `mistral-vibe`, or `mcp` |
+| `agent` | yes | `claude-code`, `codex`, `cursor`, `antigravity`, `mistral-vibe`, or `mcp` |
 | `type` | yes | `cli-command`, `slash-command`, `flag`, `mcp-install`, or `skill` |
 | `command` | yes | the exact command |
 | `description` | yes | what it does, in plain words |

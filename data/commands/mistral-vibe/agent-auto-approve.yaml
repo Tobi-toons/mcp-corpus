@@ -1,0 +1,16 @@
+id: vibe-agent-auto-approve
+name: Approve everything automatically
+agent: mistral-vibe
+type: flag
+command: vibe --agent auto-approve
+description: Starts Vibe with the auto-approve agent. It will not stop to ask before it edits files or runs commands. Only use it in a project you trust.
+tags:
+  - agents
+  - approvals
+source_url: https://docs.mistral.ai/vibe/code/cli/work-with-cli
+last_verified: 2026-10-07
+risk:
+  - runs-shell
+  - writes-files
+  - deletes-files
+author: Tobi-toons

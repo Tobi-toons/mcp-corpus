@@ -43,7 +43,10 @@
 
 [data-agent="claude-code"] { --brand: #d97757; }
 [data-agent="codex"] { --brand: #7c8cff; }
+<<<<<<< HEAD
 [data-agent="cursor"] { --brand: #8b98a8; }
+=======
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
 [data-agent="mistral-vibe"] { --brand: #fa520f; }
 [data-agent="antigravity"] { --brand: #4285f4; }
 
@@ -69,7 +72,11 @@
 }
 
 html {
+<<<<<<< HEAD
   background: var(--page-bg, var(--bg));
+=======
+  background: var(--bg);
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
   color: var(--text);
   color-scheme: light;
   scroll-behavior: smooth;
@@ -80,8 +87,13 @@ body {
   font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   min-height: 100vh;
   background:
+<<<<<<< HEAD
     radial-gradient(60rem 30rem at 50% -10%, var(--page-soft, var(--accent-soft)), transparent 70%),
     var(--page-bg, var(--bg));
+=======
+    radial-gradient(60rem 30rem at 50% -10%, var(--accent-soft), transparent 70%),
+    var(--bg);
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
 }
 
 .mono {
@@ -114,6 +126,7 @@ body {
     inset 0 0 50px 8px color-mix(in srgb, var(--brand, #2dd4bf) 40%, transparent);
 }
 
+<<<<<<< HEAD
 /* Black logos (Cursor) turn white on dark backgrounds */
 .dark .logo-mono, .island .logo-mono { filter: invert(1); }
 
@@ -128,6 +141,8 @@ body {
     transform 0.2s ease;
 }
 
+=======
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
 /* ============ Bouncing logos ============ */
 #bouncers {
   position: fixed;
@@ -177,7 +192,11 @@ body {
   transition: width 0.6s var(--ease), box-shadow 0.4s ease;
 }
 .island[data-open="true"] {
+<<<<<<< HEAD
   width: 740px;
+=======
+  width: 700px;
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--accent);
 }
 
@@ -196,8 +215,13 @@ body {
 .logo-row {
   display: flex;
   justify-content: center;
+<<<<<<< HEAD
   gap: 8px;
   padding: 18px 30px 6px;
+=======
+  gap: 10px;
+  padding: 18px 40px 6px;
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
 }
 
 .agent-btn {
@@ -285,8 +309,13 @@ body {
   transition:
     opacity 0.6s ease,
     transform 0.6s var(--ease),
+<<<<<<< HEAD
     border-color 0.5s ease var(--wd, 0ms),
     background-color 0.5s ease var(--wd, 0ms);
+=======
+    border-color 0.25s ease,
+    background-color 0.5s ease;
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
 }
 .bar.in { opacity: 1; transform: none; }
 .bar.in:hover { transform: translateY(-2px); border-color: var(--accent); }
@@ -304,7 +333,10 @@ body {
   background: var(--code-bg);
   color: var(--code-text);
   border-radius: 13px;
+<<<<<<< HEAD
   transition: background-color 0.5s ease var(--wd, 0ms);
+=======
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
 }
 .code-box code {
   flex: 1;
@@ -322,7 +354,10 @@ body {
   border-radius: 9999px;
   border: 1px solid var(--border);
   color: var(--muted);
+<<<<<<< HEAD
   transition: color 0.5s ease var(--wd, 0ms), border-color 0.5s ease var(--wd, 0ms);
+=======
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
 }
 .badge-warn {
   border-color: rgba(245, 158, 11, 0.5);
@@ -361,11 +396,15 @@ body {
   background: var(--accent-soft);
   font-size: 13px;
   cursor: pointer;
+<<<<<<< HEAD
   transition:
     transform 0.2s ease,
     color 0.5s ease var(--wd, 0ms),
     background-color 0.5s ease var(--wd, 0ms),
     border-color 0.5s ease var(--wd, 0ms);
+=======
+  transition: transform 0.2s ease;
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
 }
 .filter-pill:hover { transform: scale(1.04); }
 .filter-pill[hidden] { display: none; }

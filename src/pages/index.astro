@@ -22,8 +22,13 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
       <div>
         <div class="logo-row" id="agent-buttons">
           {AGENTS.map((a, n) => (
+<<<<<<< HEAD
             <button type="button" class="agent-btn" data-agent-id={a.id} aria-pressed="false" data-mono={a.mono ? '1' : '0'} style={`--brand:${a.color}; --n:${n}`}>
               <img class={a.mono ? 'logo-mono' : ''} src={a.logo} alt="" />
+=======
+            <button type="button" class="agent-btn" data-agent-id={a.id} aria-pressed="false" style={`--brand:${a.color}; --n:${n}`}>
+              <img src={a.logo} alt="" />
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
               <span>{a.label}</span>
             </button>
           ))}
@@ -42,17 +47,28 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
   <main class="page mx-auto max-w-5xl px-5 pb-24 pt-28">
     <header class="mb-10 flex flex-col items-center gap-4 text-center">
       <h1 class="text-5xl font-bold tracking-tight sm:text-6xl">
+<<<<<<< HEAD
         MCP <span class="fade-colors" style="color: var(--accent);">Corpus</span>
+=======
+        MCP <span style="color: var(--accent);">Corpus</span>
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
       </h1>
       <p class="max-w-xl text-lg" style="color: var(--muted);">
         The best commands for your AI agents, in one place. Open source, and checked by a person before they go live.
       </p>
       <div class="mt-2 flex gap-3">
         <a href={SUBMIT} target="_blank" rel="noopener noreferrer"
+<<<<<<< HEAD
            class="fade-colors rounded-full px-5 py-2.5 text-sm font-semibold hover:scale-105 active:scale-95"
            style="background: var(--accent); color: #042f2b;">Submit a command</a>
         <a href={REPO} target="_blank" rel="noopener noreferrer"
            class="fade-colors rounded-full border px-5 py-2.5 text-sm font-semibold hover:scale-105 active:scale-95"
+=======
+           class="rounded-full px-5 py-2.5 text-sm font-semibold transition hover:scale-105 active:scale-95"
+           style="background: var(--accent); color: #042f2b;">Submit a command</a>
+        <a href={REPO} target="_blank" rel="noopener noreferrer"
+           class="rounded-full border px-5 py-2.5 text-sm font-semibold transition hover:scale-105 active:scale-95"
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
            style="border-color: var(--border); background: var(--surface);">GitHub</a>
       </div>
       <p class="mt-1 text-xs" style="color: var(--muted);">Hover the bar at the top and pick a logo to filter.</p>
@@ -169,12 +185,16 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
     input.addEventListener('input', () => apply());
 
     /* ---------- Shockwave ---------- */
+<<<<<<< HEAD
     const DURATION = 1100;
     let running: { finish: () => void } | null = null;
 
     function shockwave(next: string, x: number, y: number) {
       running?.finish(); // if a wave is still going, end it first
 
+=======
+    function shockwave(next: string, x: number, y: number) {
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
       const commit = () => {
         if (next === 'all') delete root.dataset.agent;
         else root.dataset.agent = next;
@@ -183,6 +203,7 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
 
       const tint = next === 'all' ? 'none' : next;
       const R = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y)) + 60;
+<<<<<<< HEAD
       const opts = { duration: DURATION, easing: 'cubic-bezier(.25,.75,.25,1)', fill: 'forwards' as const };
 
       // 1) keep the page background in the OLD color until the wave has covered it
@@ -204,6 +225,11 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
       commit();
 
       // 4) a circle of the new color grows from the button, with a glowing ring on its edge
+=======
+      const opts = { duration: 1100, easing: 'cubic-bezier(.25,.75,.25,1)', fill: 'forwards' as const };
+
+      // 1) a circle of the new color grows from the button
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
       const wave = document.createElement('div');
       wave.className = 'wave';
       wave.dataset.agent = tint;
@@ -212,6 +238,11 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
         [{ clipPath: `circle(0px at ${x}px ${y}px)` }, { clipPath: `circle(${R}px at ${x}px ${y}px)` }],
         opts
       );
+<<<<<<< HEAD
+=======
+
+      // 2) a glowing ring rides on the edge of that circle
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
       const ring = document.createElement('div');
       ring.className = 'wave-ring';
       ring.dataset.agent = tint;
@@ -226,6 +257,7 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
         opts
       );
 
+<<<<<<< HEAD
       // 5) when the wave has covered the screen, hand the page background over and clean up
       let done = false;
       const finish = () => {
@@ -241,6 +273,10 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
       };
       running = { finish };
       grow.finished.then(finish, () => {});
+=======
+      // 3) when it has covered the screen, make the new colors the real ones
+      grow.finished.then(() => { commit(); wave.remove(); ring.remove(); });
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
     }
 
     function setAgent(next: string, x: number, y: number) {
@@ -251,7 +287,10 @@ const SUBMIT = `${REPO}/issues/new?template=submit-command.yml`;
       if (active) {
         pillName.textContent = active.textContent?.trim() ?? '';
         pillLogo.src = active.querySelector('img')!.src;
+<<<<<<< HEAD
         pillLogo.classList.toggle('logo-mono', active.dataset.mono === '1');
+=======
+>>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
       }
       shockwave(next, x, y);
       apply();

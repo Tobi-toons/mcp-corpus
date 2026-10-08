@@ -11,11 +11,7 @@ const search = [cmd.name, cmd.description, cmd.command, cmd.agent, AGENT_LABELS[
 
 <article class="bar" data-bar data-agent-id={cmd.agent} data-search={search}>
   <div class="flex min-w-0 gap-4">
-<<<<<<< HEAD
     {agent && <img class={`mt-0.5 h-9 w-9 shrink-0 ${agent.mono ? 'logo-mono' : ''}`} src={agent.logo} alt={agent.label} loading="lazy" />}
-=======
-    {agent && <img class="mt-0.5 h-9 w-9 shrink-0" src={agent.logo} alt={agent.label} loading="lazy" />}
->>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
     <div class="min-w-0">
       <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
         <h3 class="text-base font-semibold leading-snug">{cmd.name}</h3>

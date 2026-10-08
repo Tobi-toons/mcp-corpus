@@ -3,11 +3,7 @@ import { parse } from 'yaml';
 export interface Command {
   id: string;
   name: string;
-<<<<<<< HEAD
   agent: 'claude-code' | 'codex' | 'cursor' | 'antigravity' | 'mistral-vibe' | 'mcp';
-=======
-  agent: 'claude-code' | 'codex' | 'antigravity' | 'mistral-vibe' | 'mcp';
->>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
   type: string;
   command: string;
   description: string;
@@ -22,10 +18,7 @@ export interface Command {
 export const AGENT_LABELS: Record<string, string> = {
   'claude-code': 'Claude Code',
   codex: 'Codex',
-<<<<<<< HEAD
   cursor: 'Cursor',
-=======
->>>>>>> 16b30af65bc4fc0f814f3a5973e83a5443fcb7bc
   antigravity: 'Antigravity',
   'mistral-vibe': 'Mistral Vibe',
   mcp: 'MCP',
